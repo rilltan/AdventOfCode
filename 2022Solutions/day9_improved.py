@@ -7,7 +7,6 @@ moveV = {"U":1,"D":-1,"R":0,"L":0}
 moveDiag = {0:0,1:1,2:1,-1:-1,-2:-1}
 moveStraight = {0:0,1:0,2:1,-1:0,-2:-1}
 pos = []
- 
 for i in range(10):
     pos.append([0,0])
 
