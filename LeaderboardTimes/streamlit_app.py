@@ -11,7 +11,7 @@ raw = '''{"members":{"1":{"local_score":0,"global_score":0,"id":"0","name":"0","
 # AoC Leaderboard Times
 Get the JSON text from your leaderboard and paste it here to view everybody's specific times for each day
 '''
-st.image(Image.open(r"LeaderboardTimes/instructions.png"),caption="Click on API, then JSON")
+st.image(Image.open(r"C:\Users\User\Documents\Rohan\School\Barton Peveril\Computer Science\AdventOfCode2022\data_viewer\instructions.png"),caption="Click on API, then JSON")
 rawTemp = st.text_area("Paste the JSON")
 raw = rawTemp if rawTemp!="" else raw
 data = json.loads(raw)
@@ -29,7 +29,7 @@ for i in df:
         if iparts[3] == "star_index":
             df.pop(i)
         else:
-            df.rename(columns={i: f"Day{iparts[1]}Part{iparts[2]}"},inplace=True)
+            df.rename(columns={i: f"Day{iparts[1].zfill(2)}Part{iparts[2]}"},inplace=True)
 df.rename(columns={"name":"Name","stars":"Stars","local_score":"Score"},inplace=True)
 df.sort_index(axis="columns",inplace=True,ascending=False)
 dfColumns = list(df.columns.values)
@@ -54,7 +54,7 @@ def unixToTime(unixTime,dayNumber):
 for i in df.columns:
     if i != "Name" and i != "Score" and i != "Stars":
         for j in range(len(df[i])):
-            df.at[j,i] = unixToTime(df.at[j,i],int(i[3]))
+            df.at[j,i] = unixToTime(df.at[j,i],int(i[3:5]))
 
 nameSearch = st.text_input("Search by name")
 for i in range(len(df["Name"])):
