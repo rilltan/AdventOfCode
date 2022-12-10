@@ -11,7 +11,7 @@ raw = '''{"members":{"1":{"local_score":0,"global_score":0,"id":"0","name":"0","
 # AoC Leaderboard Times
 Get the JSON text from your leaderboard and paste it here to view everybody's specific times for each day
 '''
-st.image(Image.open(r"LeaderboardTimes\instructions.png"),caption="Click on API, then JSON")
+st.image(Image.open(r"LeaderboardTimes/instructions.png"),caption="Click on API, then JSON")
 rawTemp = st.text_area("Paste the JSON")
 raw = rawTemp if rawTemp!="" else raw
 data = json.loads(raw)
