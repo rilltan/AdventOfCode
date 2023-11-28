@@ -1,0 +1,12 @@
+func(state):
+  times = list showing how long until you can construct each bot
+          if contructing any more would be useless, set it to too long
+  if (current geodes + max geodes if you built a geode robot every minute) < current best, set all times to too long
+  
+  geodes = list
+  for each of the 4 bots we could build
+    if (too long to make) geodes.add( calculate number of geodes based on current bots )
+    else geodes.add( func(state if we build this bot) )
+  
+  best = max( geodes )
+  return best
