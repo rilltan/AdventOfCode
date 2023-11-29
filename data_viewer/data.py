@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import datetime as dt
+import os
 from PIL import Image
 
 raw = '''{"members":{"1":{"local_score":0,"global_score":0,"id":"0","name":"0","stars":0,"last_star_ts":0}}}'''
@@ -11,7 +12,8 @@ raw = '''{"members":{"1":{"local_score":0,"global_score":0,"id":"0","name":"0","
 # AoC Leaderboard Times
 Get the JSON text from your leaderboard and paste it here to view everybody's specific times for each day
 '''
-st.image(Image.open(r"C:\Users\User\Documents\Rohan\School\Barton Peveril\Computer Science\AdventOfCode2022\data_viewer\instructions.png"),caption="Click on API, then JSON")
+imagefilelocation = os.path.join(os.path.dirname(__file__),"instructions.png")
+st.image(Image.open(imagefilelocation),caption="Click on API, then JSON")
 rawTemp = st.text_area("Paste the JSON")
 raw = rawTemp if rawTemp!="" else raw
 data = json.loads(raw)
