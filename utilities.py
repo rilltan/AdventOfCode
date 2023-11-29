@@ -16,6 +16,7 @@ def loadinputints(path: str):
     return lines
 
 def tryint(val):
+    """Returns casted integer if success, return original value if failed"""
     try:
         return int(val)
     except:
@@ -78,3 +79,7 @@ def getcardinals():
 def swapdict(dictionary: dict):
     """Swaps the keys and values in a dictionary. If a value is repeated then that key-value pair won't be included"""
     return dict([(val,key) for key,val in dictionary.items()])
+
+def inbounds(val: int, bound1: int, bound2: int):
+    """Checks whether a value is within some bounds. The bounds are inclusive and can be either way round"""
+    return val <= max(bound1,bound2) and val >= min(bound1,bound2)
