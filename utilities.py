@@ -23,7 +23,7 @@ def tryint(val):
 
 def getints(text: str):
     """Returns a list containing each individual integer in a string"""
-    return [int(x) for x in re.findall("-?\d+",text)]
+    return [int(x) for x in re.findall(r"-?\d+",text)]
 
 def makegrid(columns: int, rows: int, default):
     """Creates a grid of size specified and with the default value specified"""

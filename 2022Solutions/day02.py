@@ -1,4 +1,4 @@
-inputfile = open("day2.txt")
+inputfile = open("day02.txt")
 result = 0
 lines = list(map(lambda a: a.strip(), inputfile.readlines()))
 inputfile.close()

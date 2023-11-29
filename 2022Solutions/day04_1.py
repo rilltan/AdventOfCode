@@ -1,5 +1,5 @@
 import re
-inputfile = open("day4.txt")
+inputfile = open("day04.txt")
 lines = [a.strip() for a in inputfile.readlines()]
 inputfile.close()
 result = 0

@@ -1,4 +1,4 @@
-inputfile = open("day1.txt")
+inputfile = open("day01.txt")
 result = 0
 biggest = [0,0,0]
 current = 0
