@@ -1,5 +1,6 @@
 import re
 import itertools as it
+import pyperclip
 
 def loadinput(path : str):
     """Gets the input"""
@@ -83,3 +84,8 @@ def swapdict(dictionary: dict):
 def inbounds(val: int, bound1: int, bound2: int):
     """Checks whether a value is within some bounds. The bounds are inclusive and can be either way round"""
     return val <= max(bound1,bound2) and val >= min(bound1,bound2)
+
+def prco(val):
+    """Prints the value and copies it to clipboard"""
+    print(val)
+    pyperclip.copy(val)
