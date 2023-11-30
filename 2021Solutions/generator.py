@@ -9,7 +9,7 @@ data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 """
 currentdir = os.path.dirname(__file__)
 
-for i in range(5,26):
+for i in range(13,26):
     istring = str(i).zfill(2)
     folder = os.path.join(currentdir, f"day{istring}")
     if not os.path.exists(folder):
