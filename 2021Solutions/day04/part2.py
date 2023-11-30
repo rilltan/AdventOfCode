@@ -9,7 +9,7 @@ numbers = [int(x) for x in data[0].split(",")]
 data = data[1:]
 boards = []
 for i in range(int(len(data)/6)):
-    boards.append([[int(y) for y in re.split("\s+", x)] for x in data[i*6+1:i*6+6]])
+    boards.append([[int(y) for y in re.split(r"\s+", x)] for x in data[i*6+1:i*6+6]])
 
 marked = []
 for i in range(len(boards)):
