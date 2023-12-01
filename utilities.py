@@ -92,4 +92,4 @@ def findalloverlap(pattern: str, string: str):
 
 u_cardinals = [(0,1),(0,-1),(1,0),(-1,0)]
 u_adjacent = [(x,y) for x in incrange(-1,1) for y in incrange(-1,1) if x!=0 or y!=0]
-u_digits = {"zero":0,"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9}
+u_stringtodigit = {"zero":0,"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9}
