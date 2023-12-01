@@ -73,10 +73,6 @@ def product(nums):
         result *= num
     return result
 
-def getcardinals():
-    """Gets a list of the 4 2D cardinal directions as tuples"""
-    return [(0,1),(0,-1),(1,0),(-1,0)]
-
 def swapdict(dictionary: dict):
     """Swaps the keys and values in a dictionary. If a value is repeated then that key-value pair won't be included"""
     return dict([(val,key) for key,val in dictionary.items()])
@@ -93,3 +89,7 @@ def prco(val):
 def findalloverlap(pattern: str, string: str):
     """Same as re.findall() except that it allows for overlapping strings"""
     return re.findall("(?=("+pattern+"))",string)
+
+u_cardinals = [(0,1),(0,-1),(1,0),(-1,0)]
+u_adjacent = [(x,y) for x in incrange(-1,1) for y in incrange(-1,1) if x!=0 or y!=0]
+u_digits = {"zero":0,"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9}

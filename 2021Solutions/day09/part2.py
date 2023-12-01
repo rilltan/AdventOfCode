@@ -9,7 +9,7 @@ for r in range(len(data)):
     for c in range(len(data[0])):
         heights[r][c] = int(data[r][c])
 
-cardinals = getcardinals()
+cardinals = u_cardinals
 lows = []
 for r in range(len(data)):
     for c in range(len(data[0])):

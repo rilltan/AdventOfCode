@@ -10,7 +10,7 @@ for r in range(len(data)):
         heights[r][c] = int(data[r][c])
 
 result = 0
-cardinals = getcardinals()
+cardinals = u_cardinals
 for r in range(len(data)):
     for c in range(len(data[0])):
         low = True
