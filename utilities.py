@@ -89,3 +89,7 @@ def prco(val):
     """Prints the value and copies it to clipboard"""
     print(val)
     pyperclip.copy(val)
+
+def findalloverlap(pattern: str, string: str):
+    """Same as re.findall() except that it allows for overlapping strings"""
+    return re.findall("(?=("+pattern+"))",string)
