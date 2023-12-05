@@ -7,17 +7,14 @@ data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 data = [getints(x) for x in data]
 seeds = data[0]
 
-seedmap = {}
-for i,x in enumerate(data[1::]):
-    if not x:
+mapped = set()
+for i,seedmap in enumerate(data[1::]):
+    if not seedmap:
         mapped = set()
     else:
         for j in range(len(seeds)):
-            if inbounds(seeds[j],x[1],x[1]+x[2]-1) and j not in mapped:
-                if j == 1:
-                    print(x)
+            if inbounds(seeds[j],seedmap[1],seedmap[1]+seedmap[2]-1) and j not in mapped:
                 mapped.add(j)
-                seeds[j] += -x[1]+x[0]
+                seeds[j] += seedmap[0] - seedmap[1]
 
-        print(seeds)
 prco(min(seeds))
