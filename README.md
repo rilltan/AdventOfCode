@@ -2,7 +2,7 @@
 This repo contains all of my solutions for Advent of Code so far.
 |Year|Days completed|
 |---|---|
-|2023|1-5part1|
+|2023|1-5|
 |2022|1-25|
 |2021|1-11|
 

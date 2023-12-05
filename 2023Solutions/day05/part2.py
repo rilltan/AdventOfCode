@@ -19,20 +19,25 @@ for x in data[1::]:
 seedmaps = [x for x in seedmaps if x]
 seedmaps = [sorted(x,key=lambda y:y[1]) for x in seedmaps]
 
-print(seedmaps)
-print(seedranges)
+#print(seedmaps)
+#print(seedranges)
 
 for maptype in seedmaps:
     newranges = []
-    print(seedranges)
+    #print(seedranges)
     for srange in seedranges:
         sources = [(x[1],x[1]+x[2]-1) for x in maptype]
         #print(sources)
+        #print(srange,sources)
         if srange[0] < sources[0][0]:
-            newranges.append((srange[0],sources[0][0]-1))
+            newranges.append((srange[0],min(sources[0][0]-1,srange[1])))
         for smap in maptype:
             if srange[0] <= smap[1]+smap[2]-1 and srange[1] >= smap[1]:
                 newranges.append((max(srange[0],smap[1])+smap[0]-smap[1],min(srange[1],smap[1]+smap[2]-1)+smap[0]-smap[1]))
         if srange[1] > sources[-1][1]:
-            newranges.append((sources[-1][1]+1,srange[1]))
+            newranges.append((max(sources[-1][1]+1,srange[0]),srange[1]))
+        #print(newranges)
+        #print()
     seedranges = [x for x in newranges]
+
+prco(min([x[0] for x in seedranges]))
