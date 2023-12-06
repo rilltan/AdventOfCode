@@ -29,15 +29,12 @@ while upper != mid and lower != mid:
         upper = mid - 1
 max = mid
 
-prev = False
-for i in range(min-2,min+2):
-    prev = i * (time-i) >= dist
-    if prev:
+for i in range(min-3,min+3):
+    if i * (time-i) >= dist:
         min = i
         break
-for i in range(max-2,max+2):
-    prev = i * (time-i) < dist
-    if prev:
+for i in range(max-3,max+3):
+    if i * (time-i) < dist:
         max = i-1
         break
 
