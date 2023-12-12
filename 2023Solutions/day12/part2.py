@@ -12,25 +12,13 @@ def possibilites(pattern,lengths):
         if "#" in pattern:
             return 0
         return 1
-    if not pattern:
-        if len(lengths)==0:
-            return 1
-        else:
-            return 0
     if len(pattern) < sum(lengths):
         return 0
     if pattern[0] == "?":
         return possibilites("."+pattern[1:],lengths) + possibilites("#"+pattern[1:],lengths)
-    elif pattern[0] == "#":
-        for i in range(lengths[0]):
-            if pattern[i] == ".":
-                return 0
-        if len(pattern)==lengths[0]:
-            return 1
-        if pattern[lengths[0]] == "#":
-            return 0
-        return possibilites(pattern[lengths[0]+1:],lengths[1:])
-        
+    if re.match(f"[?#]{{{lengths[0]}}}([?.]|$)",pattern):
+        return possibilites(pattern[lengths[0]+1:],lengths[1:]) 
+    return 0
 
 result = 0
 for line in data:
