@@ -91,5 +91,6 @@ def findalloverlap(pattern: str, string: str):
     return re.findall("(?=("+pattern+"))",string)
 
 u_cardinals = [(0,1),(0,-1),(1,0),(-1,0)]
+u_dirs = {"N":(0,-1),"S":(0,1),"E":(1,0),"W":(-1,0)}
 u_adjacent = [(x,y) for x in incrange(-1,1) for y in incrange(-1,1) if x!=0 or y!=0]
 u_stringtodigit = {"zero":0,"one":1,"two":2,"three":3,"four":4,"five":5,"six":6,"seven":7,"eight":8,"nine":9}
