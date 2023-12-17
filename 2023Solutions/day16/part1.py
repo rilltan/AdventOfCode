@@ -37,7 +37,7 @@ while not stop:
         elif data[r][c] == "-" and dir!="E" and dir!="W":
             rays[i][0] = "E"
             rays.append(["W",c-1,r])
-        rays[i][1] += u_dirs[rays[i][0]][0]
-        rays[i][2] += u_dirs[rays[i][0]][1]
+        rays[i][1] += u_dirs[rays[i][0]][1]
+        rays[i][2] += u_dirs[rays[i][0]][0]
 
 prco(len(result))
