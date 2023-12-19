@@ -13,54 +13,24 @@ for j,line in enumerate(data):
     for i in range(len(stuff)-1):
         ways = stuff[i].split(":")
         maps[name[0]].append((ways[0],ways[1]))
-    maps[name[0]].append(("True",stuff[-1][:-1]))
+    maps[name[0]].append(("x>0",stuff[-1][:-1]))
 
-letters = ["x","m","a","s"]
-def explore(func,ranges=[{"x":[],"m":[],"a":[],"s":[]}]):
-    for line in maps[func]:
-        if line[0] == "True":
-            if line[1] == "A":
-                ranges.append({"x":[x for x in ranges[-1]["x"]],"m":[x for x in ranges[-1]["m"]],"a":[x for x in ranges[-1]["a"]],"s":[x for x in ranges[-1]["s"]]})
-                return ranges
-            if line[1] == "R":
-                return ranges
-            return explore(line[1],ranges)
-        if line[1] != "R":
-            if line[0][1] == ">":
-                ranges[-1][line[0][0]].append((int(line[0][2:])+1,4000))
-            else:
-                ranges[-1][line[0][0]].append((1,int(line[0][2:])-1))
-            if line[1] == "A":
-                ranges.append({"x":[x for x in ranges[-1]["x"]],"m":[x for x in ranges[-1]["m"]],"a":[x for x in ranges[-1]["a"]],"s":[x for x in ranges[-1]["s"]]})
-                ranges[-1][line[0][0]][-1] = (int(line[0][2:]),4000) if line[0][1]=="<" else (1,int(line[0][2:]))
-            else:
-                lengths = [len(ranges[-1][x]) for x in letters]
-                explore(line[1],ranges)
-                for j,letter in enumerate(letters):
-                    for i in range(-lengths[j]+len(ranges[-1][letter])):
-                        ranges[-1][letter].pop()
-                ranges[-1][line[0][0]][-1] = (int(line[0][2:]),4000) if line[0][1]=="<" else (1,int(line[0][2:]))
+def explore(func,ranges):
+    ways = 0
+    for rule in maps[func]:
+        letter = rule[0][0]
+        num = int(rule[0][2:])
+        original = ranges[letter]
 
-        else:
-            if line[0][1] == "<":
-                ranges[-1][line[0][0]].append((int(line[0][2:]),4000))
-            else:
-                ranges[-1][line[0][0]].append((1,int(line[0][2:])))
+        ranges[letter] = (max(original[0],num+1),original[1]) if rule[0][1] == ">" else (original[0],min(original[1],num-1))
+        if rule[1] == "A":
+            ways += product(ranges[x][1]-ranges[x][0]+1 for x in ranges)
+        elif rule[1] != "R":
+            oldranges = {a:b for a,b in ranges.items()}
+            ways += explore(rule[1],ranges)
+            ranges = {a:b for a,b in oldranges.items()}
+        
+        ranges[letter] = (max(original[0],num),original[1]) if rule[0][1] == "<" else (original[0],min(original[1],num))
+    return ways
 
-def combineranges(x,y):
-    if x[1] < y[0] or x[0] > y[1]:
-        return (0,-1)
-    else:
-        return (max(x[0],y[0]),min(x[1],y[1]))
-
-result = 0
-ranges = explore("in")
-for lrange in ranges[:-1]:
-    ways = 1
-    for l in lrange:
-        currentrange = (1,4000)
-        for r in lrange[l]:
-            currentrange = combineranges(currentrange,r)
-        ways *= currentrange[1]-currentrange[0]+1
-    result += ways
-prco(result)
+prco(explore("in",{"x":(1,4000),"m":(1,4000),"a":(1,4000),"s":(1,4000)}))

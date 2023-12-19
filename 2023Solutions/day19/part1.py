@@ -26,11 +26,10 @@ def sim(x,m,a,s,func):
 
 result = 0
 for i,line in enumerate(data[1]):
-    n = getints(line)
-    x = n[0]
-    m = n[1]
-    a = n[2]
-    s = n[3]
+    x,m,a,s = 0,0,0,0
+    for command in removechars(line,"{}").split(","):
+        exec(command)
     if sim(x,m,a,s,"in"):
         result += x+m+a+s
+
 prco(result)

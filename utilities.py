@@ -44,7 +44,7 @@ def incrange(start: int, end: int):
 
 def removechars(text: str, charsToRemove: str):
     """Returns 'text' with any characters that appear in 'charsToRemove' removed"""
-    return re.sub("|".join(charsToRemove), "", text)
+    return re.sub("["+charsToRemove+"]", "", text)
 
 def removestringslist(text: str, stringsToRemove: list):
     """Returns 'text' with any substrings that appear in the 'stringsToRemove' list removed"""
