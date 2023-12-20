@@ -18,7 +18,7 @@ for x in modules:
             conj[y][x] = 0
 
 stack = deque()
-for i in range(15000):
+for i in range(1,15000):
     stack.append((0,"broadcaster","")) # (value, destination, sender)
     while stack:
         val,dest,sender = stack.popleft()
@@ -48,17 +48,17 @@ for i in range(15000):
 
 # In my puzzle input data, rx has one input, &vr, so for rx to recieve 0, vr must recieve all 1s
 # When running this program, it outputs:
-#   1 vr tn 3760
-#   1 vr dr 3820
-#   1 vr bm 3888
-#   1 vr cl 3942
-#   1 vr tn 7521
-#   1 vr dr 7641
-#   1 vr bm 7777
-#   1 vr cl 7885
-#   1 vr tn 11282
-#   1 vr dr 11462
-#   1 vr bm 11666
-#   1 vr cl 11828
+#   1 vr tn 3761
+#   1 vr dr 3821
+#   1 vr bm 3889
+#   1 vr cl 3943
+#   1 vr tn 7522
+#   1 vr dr 7642
+#   1 vr bm 7778
+#   1 vr cl 7886
+#   1 vr tn 11283
+#   1 vr dr 11463
+#   1 vr bm 11667
+#   1 vr cl 11829
 # vr's four inputs follow a linear sequence for when they output a 1
-# I ran math.lcm(3760,3820,3888,3942) to get my answer
+# I ran math.lcm(3761,3821,3889,3943) to get my answer
