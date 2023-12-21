@@ -106,7 +106,7 @@ prco(formula(26501365))
 
 # TILES IN NON-FILLED GRIDS
 # 26501365 % 131 = 65, so I looked at how many reachable tiles were in non-filled grids when i % 131 == 65
-# For each n, the outermost ring of filled swaps between odd and even, so I made two equations for when n is odd and when n is even
+# For each n, the outermost ring of filled grids swaps between odd and even, so I made two equations, one for when n is odd and one for when n is even
 #
 # I used an online calculator to do Newton's forward interpolation formula, using the data in the second table printed by this program
 # x = n, f(x) = tiles in non-filled grids
