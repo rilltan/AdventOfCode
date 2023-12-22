@@ -27,7 +27,7 @@ def getints(text: str):
     """Returns a list containing each individual integer in a string"""
     return [int(x) for x in re.findall(r"-?\d+",text)]
 
-def makegrid(columns: int, rows: int, default):
+def makegrid(rows: int, columns: int, default):
     """Creates a grid of size specified and with the default value specified"""
     return [[default]*columns for _ in range(rows)]
 

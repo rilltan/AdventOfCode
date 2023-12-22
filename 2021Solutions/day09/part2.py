@@ -4,7 +4,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 from utilities import *
 data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 
-heights = makegrid(len(data[0]),len(data),-1)
+heights = makegrid(len(data),len(data[0]),-1)
 for r in range(len(data)):
     for c in range(len(data[0])):
         heights[r][c] = int(data[r][c])

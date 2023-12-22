@@ -5,7 +5,7 @@ from utilities import *
 data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 
 
-currentstate = makegrid(len(data),len(data[0]),"")
+currentstate = makegrid(len(data[0]),len(data),"")
 for r in range(len(data)):
     for c in range(len(data[0])):
         currentstate[r][c] = data[r][c]
