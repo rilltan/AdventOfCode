@@ -1,31 +1,33 @@
 import os
 import sys
-import numpy
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 from utilities import *
 data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 data = [getints(x) for x in data]
 
+# This is very unreadable, I simplified most of the maths and I don't really remember what each bit does
 def findline(a,b,h1,h2):
-    k1 = (h1[4]-b)/(h1[3]-a)
-    k2 = (h2[4]-b)/(h2[3]-a)
-
-    mat1 = numpy.linalg.inv([[k1,-1],[k2,-1]])
-    mat2 = [[k1*h1[0]-h1[1]],[k2*h2[0]-h2[1]]]
-    mat = numpy.matmul(mat1,mat2)
-    x = mat[0][0]
-    y = mat[1][0]
-
-    time1 = (x-h1[0])/(h1[3]-a)
-    time2 = (x-h2[0])/(h2[3]-a)
+    try:
+        k1 = (h1[4]-b)/(h1[3]-a)
+        k2 = (h2[4]-b)/(h2[3]-a)
+    except ZeroDivisionError:
+        return False
     
-    mat1 = numpy.linalg.inv([[time1,1],[time2,1]])
-    mat2 = [[h1[2]+h1[5]*time1],[h2[2]+h2[5]*time2]]
-    mat = numpy.matmul(mat1,mat2)
-    z = mat[1][0]
-    c = mat[0][0]
+    det = k2 - k1
+    if det==0:
+        return False
+    x = (k2*h2[0] - h2[1] - k1*h1[0] + h1[1]) / det
+    y = (k1*(k2*h2[0]-h2[1]) - k2*(k1*h1[0]-h1[1])) / det
 
-    return (round(x),round(y),round(z),round(c))
+    time1 = round((x-h1[0])/(h1[3]-a))
+    time2 = round((x-h2[0])/(h2[3]-a))
+    
+    det = time1 - time2
+    m1 = h1[2] + h1[5]*time1
+    m2 = h2[2] + h2[5]*time2
+    c = (m1 - m2) / det
+    z = (time1*m2 - time2*m1) / det
+    return (round(i) for i in (x,y,z,c))
 
 def intersect(h1,h2):
     times = []
@@ -53,5 +55,6 @@ def solve():
                         break
                 if good:
                     return x+y+z
+    return 0
 
 prco(solve())
