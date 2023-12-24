@@ -16,18 +16,18 @@ def findline(a,b,h1,h2):
     det = k2 - k1
     if det==0:
         return False
-    x = (k2*h2[0] - h2[1] - k1*h1[0] + h1[1]) / det
-    y = (k1*(k2*h2[0]-h2[1]) - k2*(k1*h1[0]-h1[1])) / det
+    x = round((k2*h2[0] - h2[1] - k1*h1[0] + h1[1]) / det)
+    y = round((k1*(k2*h2[0]-h2[1]) - k2*(k1*h1[0]-h1[1])) / det)
 
-    time1 = round((x-h1[0])/(h1[3]-a))
-    time2 = round((x-h2[0])/(h2[3]-a))
+    time1 = (x-h1[0])//(h1[3]-a)
+    time2 = (x-h2[0])//(h2[3]-a)
     
     det = time1 - time2
     m1 = h1[2] + h1[5]*time1
     m2 = h2[2] + h2[5]*time2
-    c = (m1 - m2) / det
-    z = (time1*m2 - time2*m1) / det
-    return (round(i) for i in (x,y,z,c))
+    c = (m1 - m2) // det
+    z = (time1*m2 - time2*m1) // det
+    return (x,y,z,c)
 
 def intersect(h1,h2):
     times = []
