@@ -8,15 +8,12 @@ data = [getints(x) for x in data]
 def findline(a,b,h1,h2):
     # a,b,c = velocity of rock
     # x,y,z = starting position of rock
-    # h1 = coefficients of vector equation for first line
-    # h2 = coefficients of vector equation for second line
-    # t1 = time first hailstone collides with rock
-    # t2 = time second hailstone collids with rock
+    # h1/h2 = coefficients of vector equation for first/second hailstone
+    # t1/t2 = time when first/second hailstone collides with rock
 
-    # Given a and b, we want to find x,y,z,c such that:
-    # [x,y,z] + t*[a,b,c] = [h1.x,h1.y,h1.z] + t*[h1.a,h1.b,h1.c] for some t
-    # and
-    # [x,y,z] + t*[a,b,c] = [h2.x,h2.y,h2.z] + t*[h2.a,h2.b,h2.c] for some t
+    # Given a, b, h1, and h2, we want to find x,y,z,c such that:
+    # [x,y,z] + t1*[a,b,c] = [h1.x,h1.y,h1.z] + t1*[h1.a,h1.b,h1.c]
+    # [x,y,z] + t2*[a,b,c] = [h2.x,h2.y,h2.z] + t2*[h2.a,h2.b,h2.c]
     # ( [1,2,3] represents a vector )
     
     # After some maths these simultaneous equations become
@@ -53,15 +50,18 @@ def findline(a,b,h1,h2):
 
 def intersect(h1,h2):
     times = []
+    # Get the times when the rocks/hailstones have the same x, y, or z value
     for i in range(3):
         try:
             times.append((h1[i]-h2[i])/(h2[i+3]-h1[i+3]))
         except ZeroDivisionError:
             pass
+    # Check if the times for x, y, and z intersections are all the same
     if times[0]>0 and all(times[i]==times[i+1] for i in range(len(times)-1)):
         return True
     return False
 
+# I increased the search range until I got an answer
 r1 = -200
 r2 = 200
 def solve():
@@ -69,13 +69,8 @@ def solve():
         for b in incrange(r1,r2):
             linedata = findline(a,b,data[0],data[1])
             if linedata:
-                good = True
                 x,y,z,c = linedata
-                for h in data:
-                    if not intersect((x,y,z,a,b,c),h):
-                        good = False
-                        break
-                if good:
+                if all(intersect((x,y,z,a,b,c),h) for h in data):
                     return x+y+z
     return 0
 
