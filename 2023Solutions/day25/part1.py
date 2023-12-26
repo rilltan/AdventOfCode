@@ -7,33 +7,33 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 from utilities import *
 data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 
-wires = {}
-wireset = set()
+graph = {}
+componentset = set()
 for line in data:
     l = line.replace(":","").split(" ")
     for w in l:
-        wireset.add(w)
-    if l[0] not in wires:
-        wires[l[0]] = []
-    wires[l[0]].extend(l[1:])
-    for edge in l[1:]:
-        if edge not in wires:
-            wires[edge] = []
-        wires[edge].append(l[0])
-wirelist = list(wireset)
+        componentset.add(w)
+    if l[0] not in graph:
+        graph[l[0]] = []
+    graph[l[0]].extend(l[1:])
+    for wire in l[1:]:
+        if wire not in graph:
+            graph[wire] = []
+        graph[wire].append(l[0])
+components = list(componentset)
 
 def findpath(nodes):
     start = nodes[0]
     end = nodes[1]
     q = deque([start])
     paths = {}
-    pos = start
-    while pos != end:
-        for wire in wires[pos]:
-            if wire not in paths:
-                paths[wire] = pos
-                q.append(wire)
-        pos = q.popleft()
+    currentitem = start
+    while currentitem != end:
+        for component in graph[currentitem]:
+            if component not in paths:
+                paths[component] = currentitem
+                q.append(component)
+        currentitem = q.popleft()
     path = []
     done = False
     while not done:
@@ -49,13 +49,13 @@ def bfs(start,cuts):
     q.append(start)
     seen.add(start)
     while q:
-        pos = q.popleft()
-        for wire in wires[pos]:
-            if any((wire==cuts[i][0] and pos==cuts[i][1]) or (wire==cuts[i][1] and pos == cuts[i][0]) for i in range(len(cuts))):
+        currentitem = q.popleft()
+        for component in graph[currentitem]:
+            if any((component==cuts[i][0] and currentitem==cuts[i][1]) or (component==cuts[i][1] and currentitem == cuts[i][0]) for i in range(len(cuts))):
                 continue
-            if wire not in seen:
-                seen.add(wire)
-                q.append(wire)
+            if component not in seen:
+                seen.add(component)
+                q.append(component)
     return seen
 
 def bfscuts(cuts):
@@ -65,38 +65,38 @@ def bfscuts(cuts):
     q.append(start)
     seen.add(start)
     while q:
-        pos = q.popleft()
-        for wire in wires[pos]:
-            if any((wire==cuts[i][0] and pos==cuts[i][1]) or (wire==cuts[i][1] and pos == cuts[i][0]) for i in range(len(cuts))):
+        currentitem = q.popleft()
+        for component in graph[currentitem]:
+            if any((component==cuts[i][0] and currentitem==cuts[i][1]) or (component==cuts[i][1] and currentitem == cuts[i][0]) for i in range(len(cuts))):
                 continue
-            if wire not in seen:
-                seen.add(wire)
-                q.append(wire)
+            if component not in seen:
+                seen.add(component)
+                q.append(component)
         if cuts[0][1] in seen:
             return False
     return seen
 
 def findgroups(cuts):
-    group1 = bfscuts(cuts)
-    if group1 and len(group1) != len(wireset):
-        return len(group1)*(len(wireset)-len(group1))
+    group = bfscuts(cuts)
+    if group and len(group) != len(components):
+        return len(group)*(len(components)-len(group))
     return -1
 
 
 counts = {}
 for i in range(500):
-    for edge in findpath(random.sample(wirelist,2)):
-        if edge == -1:
+    for wire in findpath(random.sample(components,2)):
+        if wire == -1:
             continue
-        if edge not in counts:
-            counts[edge] = 0
-        counts[edge] += 1
+        if wire not in counts:
+            counts[wire] = 0
+        counts[wire] += 1
 
-items = [(x,y) for x,y in counts.items()]
-items.sort(key=lambda x:x[1],reverse=True)
-items = [x[0] for x in items]
-items = [x for x in items if type(x)!=str]
-for cuts in it.combinations(items[:10],3):
+wires = [(x,y) for x,y in counts.items()]
+wires.sort(key=lambda x:x[1],reverse=True)
+wires = [x[0] for x in wires]
+wires = [x for x in wires if type(x)!=str]
+for cuts in it.combinations(wires[:3],3):
     result = findgroups(cuts)
     if result != -1:
         print(result)
