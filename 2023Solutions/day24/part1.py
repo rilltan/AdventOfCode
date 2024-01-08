@@ -7,8 +7,8 @@ data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 data = [getints(x) for x in data]
 
 def intersect(h1,h2,bound1,bound2):
-    # h1 = coefficients of vector equation for first line
-    # h2 = coefficients of vector equation for second line
+    # h1 = coefficients of vector equation for first hailstone
+    # h2 = coefficients of vector equation for second hailstone
     
     # Getting h1 and h2 in the form ax + by + c = 0
     # a = 1 so we can ignore it
@@ -40,4 +40,4 @@ for h1,h2 in itertools.combinations(data,2):
     if intersect(h1,h2,200000000000000,400000000000000):
         result += 1
 
-prco(result)
+print(result)
