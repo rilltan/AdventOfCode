@@ -7,15 +7,27 @@ data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 data = [getints(x) for x in data]
 
 def intersect(h1,h2,bound1,bound2):
-    a1,b1,c1 = 1,-(h1[4]/h1[3]),h1[0]*(h1[4]/h1[3])-h1[1]
-    a2,b2,c2 = 1,-(h2[4]/h2[3]),h2[0]*(h2[4]/h2[3])-h2[1]
+    # h1 = coefficients of vector equation for first line
+    # h2 = coefficients of vector equation for second line
+    
+    # Getting h1 and h2 in the form ax + by + c = 0
+    # a = 1 so we can ignore it
+    b1 = -(h1[4]/h1[3])
+    c1 = h1[0]*(h1[4]/h1[3])-h1[1]
+    b2 = -(h2[4]/h2[3])
+    c2 = h2[0]*(h2[4]/h2[3])-h2[1]
 
-    det = a1*b2 - b1*a2
+    # Solving for x and y (intersection point)
+    # [a1 b1]^-1 * [c1] = [x]
+    # [a2 b2]      [c2]   [y]
+    det = b2 - b1
     if det == 0:
         return False
-    y = (-b2*c1 + b1*c2) / det
-    x = (a2*c1 - a1*c2) / det
+    x = (c1 - c2) / det
+    y = (b1*c2 - b2*c1) / det
 
+    # Solving for t (time each hailstone reaches intersection)
+    # f(t) = start x + vel x * t
     time1 = (x-h1[0]) / h1[3]
     time2 = (x-h2[0]) / h2[3]
     if time1 > 0 and time2 > 0:
