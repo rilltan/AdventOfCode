@@ -3,7 +3,7 @@ import itertools as it
 import pyperclip
 import string
 
-def loadinput(path : str):
+def loadinput(path: str):
     """Gets the input"""
     inputfile = open(path)
     lines = [a.strip() for a in inputfile.readlines()]
