@@ -2,6 +2,7 @@ import re
 import itertools as it
 import pyperclip
 import string
+import math
 
 def loadinput(path: str):
     """Gets the input"""
