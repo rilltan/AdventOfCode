@@ -3,7 +3,6 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 from utilities import *
 data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
-import numpy
 
 def tokens(ax,ay,bx,by,tx,ty):
     # these equations come from (ax,bx)(i) = (tx)
