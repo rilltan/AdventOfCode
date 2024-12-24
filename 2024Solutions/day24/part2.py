@@ -4,6 +4,8 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 from utilities import *
 data = loadinput(os.path.join(os.path.dirname(__file__),"input.txt"))
 
+# This code doesn't work out the answer, it just prints some helpful data for me to figure it out manually
+
 original_states = {}
 for i,line in enumerate(data):
     if line == "":
